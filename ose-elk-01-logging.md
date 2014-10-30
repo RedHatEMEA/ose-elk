@@ -181,7 +181,7 @@ configuring a `SYSLOG` appender
 
 Restart the `activemq` service.
 
-## Configuring OpenShift nodes to use syslog
+# Configuring OpenShift nodes to use syslog
 
 ## Configuring Apache httpd to use syslog and annotate log messages
 
