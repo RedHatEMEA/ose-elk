@@ -1,0 +1,20 @@
+Intro: present components
+Intro: describe environment
+
+Design: better logstash config
+Design: adding system check from openshift_zabbix
+Design: creating dashboards for operators and devs
+
+Extension: metrics/logs as a service for individual apps (cartridge)
+Extension: monitoring alerts from graphite
+
+Maintenance: moving/backing up es indexes
+Maintenance: moving/backing up graphite files
+
+Scaling: memory/workers configuration for es
+Scaling: memory/workers configuration for logstash
+Scaling: multi node deployment
+Scaling: es cluster
+Scaling: graphite cluster
+
+
