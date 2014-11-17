@@ -1,0 +1,4 @@
+#!/bin/bash
+
+erb html/app/app.ae1e5ed0.js.erb > html/app/app.ae1e5ed0.js
+

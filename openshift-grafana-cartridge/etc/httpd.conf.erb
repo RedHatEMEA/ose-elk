@@ -1,0 +1,66 @@
+ServerTokens OS
+ServerRoot "<%= ENV['OPENSHIFT_GRAFANA_DIR'] %>"
+PidFile run/httpd.pid
+Timeout 30
+KeepAlive On
+MaxKeepAliveRequests 100
+KeepAliveTimeout 3
+
+<IfModule prefork.c>
+StartServers       1
+MinSpareServers    1
+MaxSpareServers    4
+ServerLimit      256
+MaxClients        64
+MaxRequestsPerChild  1000
+</IfModule>
+
+Listen <%= ENV['OPENSHIFT_GRAFANA_IP']%>:<%=ENV['OPENSHIFT_GRAFANA_PORT'] %>
+
+LoadModule log_config_module modules/mod_log_config.so
+LoadModule logio_module modules/mod_logio.so
+LoadModule expires_module modules/mod_expires.so
+LoadModule deflate_module modules/mod_deflate.so
+LoadModule headers_module modules/mod_headers.so
+LoadModule mime_module modules/mod_mime.so
+LoadModule dir_module modules/mod_dir.so
+
+User apache
+Group apache
+
+ServerAdmin root@localhost
+UseCanonicalName Off
+
+DocumentRoot "html/"
+
+<Directory />
+    Options FollowSymLinks
+    AllowOverride None
+</Directory>
+
+<Directory "html/">
+    Options FollowSymLinks
+    AllowOverride None
+</Directory>
+
+DirectoryIndex index.html index.html.var
+
+TypesConfig /etc/mime.types
+DefaultType text/plain
+
+HostnameLookups Off
+
+ErrorLog logs/error_log
+LogLevel warn
+LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+LogFormat "%{Referer}i -> %U" referer
+LogFormat "%{User-agent}i" agent
+CustomLog logs/access_log combined
+ServerSignature On
+
+AddDefaultCharset UTF-8
+AddType application/x-compress .Z
+AddType application/x-gzip .gz .tgz
+AddType application/x-x509-ca-cert .crt
+AddType application/x-pkcs7-crl    .crl

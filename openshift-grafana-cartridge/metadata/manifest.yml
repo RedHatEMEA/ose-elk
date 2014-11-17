@@ -1,0 +1,41 @@
+Name: grafana
+Cartridge-Short-Name: grafana
+Cartridge-Version: '0.1.1'
+Compatible-Versions:
+- '0.1.1'
+Cartridge-Vendor: adrahon
+Display-Name: Grafana 1.8.1
+Description: "Grafana is a metrics dashboard and graph editor."
+Version: '1.8.1'
+Versions:
+- '1.8.1'
+License: "Apache License, Version 2.0"
+License-Url: http://www.apache.org/licenses/LICENSE-2.0
+Vendor: "Torkel Ödegaard & Coding Instinct AB"
+Categories:
+- web_framework
+- instant_app
+- domain_scope
+- graphite
+- grafana
+Provides:
+- grafana
+- grafana-1.8
+Publishes: 
+Subscribes: 
+Scaling:
+  Min: 1
+  Max: 1
+Endpoints:
+- Private-IP-Name: IP
+  Private-Port-Name: PORT
+  Private-Port: 8080
+  Public-Port-Name: PROXY_PORT
+  Protocols:
+  - http
+  Options:
+    primary: true
+  Mappings:
+  - Frontend: ''
+    Backend: ''
+

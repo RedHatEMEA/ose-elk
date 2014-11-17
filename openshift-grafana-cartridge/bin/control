@@ -1,0 +1,38 @@
+#!/bin/bash -e
+
+PATH=/bin/:/usr/sbin:$PATH
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+function start() {
+  httpd -f $OPENSHIFT_GRAFANA_DIR/etc/httpd.conf -k start
+}
+
+function stop() {
+  httpd -f $OPENSHIFT_GRAFANA_DIR/etc/httpd.conf -k stop
+}
+
+function restart() {
+  httpd -f $OPENSHIFT_GRAFANA_DIR/etc/httpd.conf -k restart
+}
+
+function catchall() {
+  echo "Not yet implemented"
+}
+
+# Handle commands.
+case "$1" in
+    start)               start       ;;
+    restart|graceful)    restart     ;;
+    graceful-stop|stop)  stop        ;;
+    status)              status      ;;
+    reload)              catchall    ;;
+    tidy)                catchall    ;;
+    pre-build)           catchall    ;;
+    build)               catchall    ;;
+    deploy)              catchall    ;;
+    post-deploy)         catchall    ;;
+    *)           exit 0
+esac
+
+exit 0
