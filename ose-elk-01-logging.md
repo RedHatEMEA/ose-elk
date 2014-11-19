@@ -15,11 +15,11 @@ We store logs in `/var/log/rsyslog/` and use one file per program (same file for
 all hosts). The `/var/log/rsyslog` directory must be created first and readable by
 logstash (eg. `chmod 0755`).
 
-SELinux must be configured to allow rsyslog traffic:
+The host firewall must also be configured to allow both UDP and TCP port 514, for example with:
 
-    # semanage -a -t syslogd_port_t -p udp 514
-
-The host firewall must also be configured to allow both UDP and TCP port 514.
+    # iptables -A INPUT -m tcp -p tcp --dport 514 -j ACCEPT
+    # iptables -A INPUT -m udp -p udp --dport 514 -j ACCEPT
+    # service iptables save
 
 ## Rsyslog configuration
 
