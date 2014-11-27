@@ -186,7 +186,7 @@ Kibana uses Elasticsearch as a backend, change its configuration to use the
 correct Elasticsearch URL in `/var/www/kibana/config.js`
 
     // elasticsearch: "http://"+window.location.hostname+":9200",
-    elasticsearch: "http://es.example.com:80",
+    elasticsearch: "http://es.example.com",
 
 We've defined a proxy for Elasticsearch in Apache httpd's configuration, so we
 don't use ElasticSearch's port 9200.
