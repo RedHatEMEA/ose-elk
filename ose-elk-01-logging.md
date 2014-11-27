@@ -52,8 +52,8 @@ Restart the `rsyslog` service.
 
 ## Log rotation
 
-You may want to add a specific rule for log rotation in /var/log/rsyslog, for
-example by creating the /etc/logrotate.d/syslog-server file with the following
+You may want to add a specific rule for log rotation in `/var/log/rsyslog`, for
+example by creating the `/etc/logrotate.d/syslog-server` file with the following
 content:
 
     /var/log/rsyslog/*.log {
