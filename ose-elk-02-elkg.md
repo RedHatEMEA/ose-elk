@@ -95,7 +95,7 @@ operations.
 If Logstash's Elasticsearch output is working, it should create an index for
 each day with a name like `logstash-YYY.MM.DD`. List Elasticsearch indexes with
 
-    curl 'localhost:9200/_cat/indices?v
+    curl localhost:9200/_cat/indices?v
 
 To delete test indexes and remove Logstash's logfile position tracker, stop the
 logstash service and use
