@@ -154,7 +154,12 @@ Configure a virtual host for Elasticsearch and Kibana by creating
       </LocationMatch>
     </VirtualHost>
 
-Start and enable the `httpd` service
+Start and enable the `httpd` service.
+
+Because we are using httpd as a reverse proxy, we must set an SELinux boolean to
+allow it to connect to the network
+
+    setsebool -P httpd_can_network_connect 1
 
 ## Kibana installation
 
