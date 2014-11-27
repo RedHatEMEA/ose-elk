@@ -48,6 +48,21 @@ file per originator program for all hosts:
     :fromhost-ip,!isequal,"127.0.0.1" -?TmplMsg
     & ~
 
+## Log rotation
+
+You may want to add a specific rule for log rotation in /var/log/rsyslog, for
+example by creating the /etc/logrotate.d/syslog-server file with the following
+content:
+
+    /var/log/rsyslog/*.log {
+        daily
+        rotate 30
+        copytruncate
+        compress
+        missingok
+        notifyempty
+    }
+
 # General configuration of OpenShift servers
 
 All OpenShift servers (brokers, broker support nodes, nodes) are configured to
@@ -59,7 +74,18 @@ files provided by a plugin.
 
     yum install -y rsyslog7 rsyslog7-mmopenshift
 
-Rsyslog7 is configured by editing `/etc/rsyslog7.conf`.
+Important! For OpenShift Enterprise 2.2: OpenShift Enterprise 2.2 runs on
+RHEL 6.6, which comes with its own package for rsyslog7. Because the RHEL
+rsyslog7 is a replacement for the default rsyslog package, you’ll need to
+use yum shell to run a transaction:
+
+    yum shell
+    erase rsyslog
+    install rsyslog7 rsyslog7-mmopenshift
+    transaction run
+
+The rsyslog7 configuration will be in `/etc/rsyslog7.conf` for OpenShift
+Enterprise 2.1 and `/etc/rsyslog.conf` starting with OpenShift Enterprise 2.2.
 
 Disable Systemd-specific options by commenting out the following lines:
 
@@ -73,9 +99,9 @@ Disable Systemd-specific options by commenting out the following lines:
     #$IMJournalStateFile imjournal.state
 
 Make sure rsyslog7 is loading additional configuration files from
-`/etc/rsyslog7.d/*.conf`
+`/etc/rsyslog.d/*.conf`
 
-    $IncludeConfig /etc/rsyslog7.d/*.conf
+    $IncludeConfig /etc/rsyslog.d/*.conf
 
 *On OpenShift nodes only*, enable the rsyslog plugin by changing the modules section:
 
@@ -123,13 +149,21 @@ Add a forwarding rule by creating `/etc/rsyslog7.d/forward.conf` with the follow
 
 ## Replacing Rsyslog with Rsyslog7
 
-On all OpenShift servers, the default rsyslog service must be stopped and
-disabled to allow rsyslog7 to replace it.
+On OpenShift Enterprise 2.1, the rsyslog and rsyslog7 packages cohexist,
+you need to stop and disable the default rsyslog service on all OpenShift
+servers to allow rsyslog7 to replace it.
 
     # service rsyslog stop
     # chkconfig rsyslog off
     # service rsyslog7 start
     # chkconfig rsyslog7 on
+
+Starting with OpenShift 2.2, the rsyslog7 package replaces the default rsyslog,
+that is why we had to do this `yum shell` dance earlier. Just ensure that the
+rsyslog service is enabled and running.
+
+    # service rsyslog start
+    # chkconfig rsyslog on
 
 # Configuring OpenShift brokers to use syslog
 
