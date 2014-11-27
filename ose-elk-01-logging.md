@@ -210,7 +210,7 @@ configuring a `SYSLOG` appender
 
     # Syslog appender
     log4j.appender.SYSLOG = org.apache.log4j.net.SyslogAppender
-    log4j.appender.SYSLOG.syslogHost = 172.28.151.90:514
+    log4j.appender.SYSLOG.syslogHost = logstash.example.com:514
     log4j.appender.SYSLOG.layout=org.apache.log4j.PatternLayout
     log4j.appender.SYSLOG.layout.ConversionPattern=%d{MMM dd HH:mm:ss} activemq: %-5p %m%n
     log4j.appender.SYSLOG.Facility = LOCAL0
