@@ -115,7 +115,7 @@ Make sure rsyslog7 is loading additional configuration files from
     module(load="imuxsock" SysSock.Annotate="on" SysSock.ParseTrusted="on" SysSock.UsePIDFromSystem="on")
     module(load="mmopenshift")
 
-Add a forwarding rule by creating `/etc/rsyslog7.d/forward.conf` with the following content:
+Add a forwarding rule by creating `/etc/rsyslog.d/forward.conf` with the following content:
 
     $WorkDirectory /var/lib/rsyslog
     $ActionQueueFileName fwdRule1 # unique name prefix for spool files
@@ -126,7 +126,7 @@ Add a forwarding rule by creating `/etc/rsyslog7.d/forward.conf` with the follow
     *.* @@logstash.example.com:514
 
 *On OpenShift nodes only*, create a template for the plugin by creating
-`/etc/rsyslog7.d/openshift.conf` with the following content:
+`/etc/rsyslog.d/openshift.conf` with the following content:
 
     # OpenShift plugin configuration
     template(name="OpenShift" type="list")
