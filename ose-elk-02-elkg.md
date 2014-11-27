@@ -317,6 +317,15 @@ Configure a virtual host for Grafana by creating
       </Directory>
     </VirtualHost>
 
+To allow Grafana to access Graphite, we need to enable CORS
+(Cross Origin Resource Sharing) in the Graphite virtual host.
+Add the following lines to `/etc/httpd/conf.d/graphite-web.conf`
+
+    # Set headers for CORS
+    Header set Access-Control-Allow-Origin "http://grafana.example.com"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "origin, authorization, accept"
+
 Restart the `httpd` service.
 
 Test that Grafana works and metrics are accessible at
