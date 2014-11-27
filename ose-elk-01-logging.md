@@ -48,6 +48,8 @@ file per originator program for all hosts:
     :fromhost-ip,!isequal,"127.0.0.1" -?TmplMsg
     & ~
 
+Restart the `rsyslog` service.
+
 ## Log rotation
 
 You may want to add a specific rule for log rotation in /var/log/rsyslog, for
