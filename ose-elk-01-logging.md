@@ -244,7 +244,7 @@ Add the following parameters to `/etc/openshift/node.conf`
 
 Change following parameter in `/etc/openshift/logshifter.conf`
 
-    outputtype = syslog
+    outputtype = multi
 
 Restart the `ruby193-mcollective` and `openshift-watchman` services
 
